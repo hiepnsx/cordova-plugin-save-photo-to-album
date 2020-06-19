@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="cordova-plugin-save-photo-to-album"
+    version="0.0.1">
+    <engines>
+        <engine name="cordova" version=">=3.0.0" />
+    </engines>
+    <name>SavePhotoToAlbum</name>
+    <description>iOS and Android Save image file(gif, jpg, png) to photo album.</description>
+    <author>Rainy</author>
+    <keywords>gif,image base64 data,photo album,photos gallery</keywords>
+    <license>MIT</license>
+    <js-module src="www/savephototoalbum.js" name="SavePhotoToAlbum">
+        <clobbers target="cordova.plugins.savePhotoToAlbum" />
+    </js-module>
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="SavePhotoToAlbum">
+                <param name="ios-package" value="SavePhotoToAlbum" />
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+        <header-file src="src/ios/SavePhotoToAlbum.h" />
+        <source-file src="src/ios/SavePhotoToAlbum.m" />
+    </platform>
+
+     <!-- android -->
+    <platform name="android">
+        <source-file src="src/android/SavePhotoToAlbum.java" target-dir="src/net/apache/cordova/plugins"/>
+        <config-file parent="/*" target="AndroidManifest.xml">
+            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+            <uses-permission android:name="android.permission.DELETE_CACHE_FILES"/>
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+            <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+            <uses-permission android:name="android.permission.INTERNET" />
+        </config-file>
+        <config-file parent="/*" target="res/xml/config.xml">
+            <feature name="SavePhotoToAlbum">
+                <param name="android-package" value="net.apache.cordova.plugins.SavePhotoToAlbum"/>
+            </feature>
+        </config-file>
+    </platform>
+</plugin>
